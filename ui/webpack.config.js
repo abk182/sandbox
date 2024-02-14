@@ -25,7 +25,7 @@ const serverConfig = Object.assign({
   target: 'node',
   entry: "./src/server/index.tsx",
   output: {
-    filename: "server/index.js",
+    filename: "server.js",
     path: path.resolve(__dirname, "dist"),
   },
 }, config);
@@ -34,7 +34,7 @@ const clientConfig = Object.assign({
   target: 'web',
   entry: "./src/client/index.tsx",
   output: {
-    filename: "client/index.js",
+    filename: "assets/client.js",
     path: path.resolve(__dirname, "dist"),
   },
 }, config)

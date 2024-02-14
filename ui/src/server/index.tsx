@@ -11,7 +11,7 @@ const startServer = () => {
 
     const app = express();
 
-    app.use("/client", express.static(path.join(__dirname, "../client")));
+    app.use("/assets", express.static(path.join(__dirname, "./assets")));
 
     app.get("/", (req, res) => {
       res.end(
@@ -19,7 +19,7 @@ const startServer = () => {
           <html>
             <body>
               <div id=${appId}>${renderToStaticMarkup(<App />)}</div>
-              <script src="client/index.js"></script>
+              <script src="assets/client.js"></script>
             </body>
           </html>`
       );
