@@ -1,7 +1,10 @@
 import React from "react";
+import { TargetIncomeForm } from './target-income-form'
 
 export const appId = 'app';
 
 export const App = () => {
-  return <h1>Hello world</h1>;
+  return <div>
+    <TargetIncomeForm />
+  </div>;
 };
