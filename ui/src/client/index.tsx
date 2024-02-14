@@ -1,3 +1,5 @@
 import React from 'react';
 
-export default () => {console.log(<h1>Hello world</h1>)}
+console.log('Hello World')
+
+export default () => {return <h1>Hello world</h1>}
