@@ -1,5 +1,6 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import { appId } from '../constants';
 
-console.log('Hello World')
+ReactDOM.render(<h2>'Hello World'</h2>, document.getElementById(appId))
 
-export default () => {return <h1>Hello world</h1>}
