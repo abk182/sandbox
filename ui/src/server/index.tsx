@@ -2,16 +2,14 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import express from "express";
 import path from "path";
-import { App } from "../app";
-import { appId } from "../constants";
+import { App, appId } from "../app";
 
 const startServer = () => {
-  try {
+    const assetsFolderName = 'assets'
     const port = 8080;
-
     const app = express();
 
-    app.use("/assets", express.static(path.join(__dirname, "./assets")));
+    app.use(`/${assetsFolderName}`, express.static(path.join(__dirname, `/${assetsFolderName}`)));
 
     app.get("/", (req, res) => {
       res.end(
@@ -19,7 +17,7 @@ const startServer = () => {
           <html>
             <body>
               <div id=${appId}>${renderToStaticMarkup(<App />)}</div>
-              <script src="assets/client.js"></script>
+              <script src="${assetsFolderName}/client.js"></script>
             </body>
           </html>`
       );
@@ -28,9 +26,6 @@ const startServer = () => {
     app.listen(port, () => {
       console.log(`App listening on port ${port}`);
     });
-  } catch (err) {
-    console.log(err);
-  }
 };
 
 startServer();
