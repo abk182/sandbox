@@ -1,8 +1,8 @@
 import React from "react";
-import { renderToStaticMarkup } from "react-dom/server";
+import { renderToString } from "react-dom/server";
 import express from "express";
 import path from "path";
-import { App, appId } from "../app";
+import { Ui, rootDomNodeId } from "../ui";
 
 const startServer = () => {
     const assetsFolderName = 'assets'
@@ -16,7 +16,7 @@ const startServer = () => {
         `<!DOCTYPE html>
           <html>
             <body>
-              <div id=${appId}>${renderToStaticMarkup(<App />)}</div>
+              <div id=${rootDomNodeId}>${renderToString(<Ui />)}</div>
               <script src="${assetsFolderName}/client.js"></script>
             </body>
           </html>`
@@ -24,7 +24,7 @@ const startServer = () => {
     });
 
     app.listen(port, () => {
-      console.log(`App listening on port ${port}`);
+      console.log(`On port ${port}`);
     });
 };
 
