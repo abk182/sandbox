@@ -5,33 +5,44 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        use: "ts-loader",
-        exclude: /node_modules/,
+        test: /\.(ts|tsx)$/,
+        use: ["ts-loader"],
+        include: path.resolve(__dirname, "src"),
+      },
+      {
+        test: /\.css$/i,
+        use: ["css-loader"],
+        include: path.resolve(__dirname, "src"),
       },
     ],
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },
-}
+};
 
-const serverConfig = Object.assign({
-  target: 'node',
-  entry: "./src/server/index.tsx",
-  output: {
-    filename: "server.js",
-    path: path.resolve(__dirname, "dist"),
+const serverConfig = Object.assign(
+  {
+    target: "node",
+    entry: "./src/server/index.tsx",
+    output: {
+      filename: "server.js",
+      path: path.resolve(__dirname, "dist"),
+    },
   },
-}, config);
+  config
+);
 
-const clientConfig = Object.assign({
-  target: 'web',
-  entry: "./src/client/index.tsx",
-  output: {
-    filename: "assets/client.js",
-    path: path.resolve(__dirname, "dist"),
+const clientConfig = Object.assign(
+  {
+    target: "web",
+    entry: "./src/client/index.tsx",
+    output: {
+      filename: "assets/client.js",
+      path: path.resolve(__dirname, "dist"),
+    },
   },
-}, config)
+  config
+);
 
 module.exports = [serverConfig, clientConfig];
