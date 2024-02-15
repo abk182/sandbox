@@ -6,12 +6,22 @@ const config = {
     rules: [
       {
         test: /\.(ts|tsx)$/,
-        use: ["ts-loader"],
+        use: "ts-loader",
         include: path.resolve(__dirname, "src"),
       },
       {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        test: /\.css$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                localIdentName: "[name]_[local]_[hash:base64]"
+              },
+            },
+          },
+        ],
         include: path.resolve(__dirname, "src"),
       },
     ],

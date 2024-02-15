@@ -1,0 +1,7 @@
+.app {
+    background-color: beige;
+}
+
+:root {
+    --gap-xs: 4px;
+}
