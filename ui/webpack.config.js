@@ -13,11 +13,6 @@ const config = {
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
-    fallback: {
-      http: false,
-      "buffer": require.resolve("buffer"),
-      "url": require.resolve("url")
-    },
   },
 }
 
