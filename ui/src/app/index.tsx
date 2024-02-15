@@ -3,11 +3,11 @@ import { TargetIncomeForm } from "./target-income-form";
 
 export const appId = "app";
 
-import css from "./index.css";
+import "./index.global.css";
 
 export const App = () => {
   return (
-    <div className={css.app}>
+    <div className={"app"}>
       <TargetIncomeForm />
     </div>
   );

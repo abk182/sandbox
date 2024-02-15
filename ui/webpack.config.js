@@ -11,18 +11,24 @@ const config = {
       },
       {
         test: /\.css$/,
+        exclude: /\.global\.css$/,
         use: [
-          "style-loader",
+          { loader: "style-loader" },
           {
             loader: "css-loader",
             options: {
               modules: {
-                localIdentName: "[name]_[local]_[hash:base64]"
+                localIdentName: "[name]_[local]_[hash:base64]",
               },
             },
           },
-          "postcss-loader",
+          { loader: "postcss-loader" },
         ],
+        include: path.resolve(__dirname, "src"),
+      },
+      {
+        test: /\.global\.css$/,
+        use: ["style-loader", "css-loader", "postcss-loader"],
         include: path.resolve(__dirname, "src"),
       },
     ],
