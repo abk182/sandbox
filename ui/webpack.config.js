@@ -21,6 +21,7 @@ const config = {
               },
             },
           },
+          "postcss-loader",
         ],
         include: path.resolve(__dirname, "src"),
       },

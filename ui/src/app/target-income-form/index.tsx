@@ -23,7 +23,7 @@ export const TargetIncomeForm = () => {
           if (!Number.isNaN(+e.target.value)) setYears(+e.target.value);
         }}
       />
-      <div>{getTargetIncome(currentIncome, years)}</div>
+      <div className="text-3xl font-bold underline">{getTargetIncome(currentIncome, years)}</div>
     </div>
   );
 };
