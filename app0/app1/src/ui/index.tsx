@@ -1,13 +1,13 @@
 import React from "react";
 import { TargetIncomeForm } from "./target-income-form";
 
-export const rootDomNodeId = "rootDomNodeId";
+export const rootDomNodeId = "app0.app1";
 
 import "./index.global.css";
 
 export const Ui = () => {
   return (
-    <div className={"app"}>
+    <div className={"ui"}>
       <TargetIncomeForm />
     </div>
   );

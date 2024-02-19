@@ -1,5 +1,14 @@
 import React from "react";
-import { hydrateRoot } from "react-dom/client";
+import { hydrateRoot, createRoot } from "react-dom/client";
 import { Ui, rootDomNodeId } from "../ui";
 
-hydrateRoot(document.getElementById(rootDomNodeId), <Ui />);
+if (document.getElementById("app0.app0")) {
+  console.log("hello from app0.app1");
+  const rootDomNode = document.createElement("div");
+  rootDomNode.id = "app0.app1";
+  document.body.append(rootDomNode);
+  const root = createRoot(rootDomNode);
+  root.render(<Ui />);
+} else {
+  hydrateRoot(document.getElementById(rootDomNodeId), <Ui />);
+}

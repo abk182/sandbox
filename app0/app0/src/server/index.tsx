@@ -17,7 +17,7 @@ const startServer = () => {
           <html>
             <body>
               <div id=${rootDomNodeId}>${renderToString(<Ui />)}</div>
-              <script src="${assetsFolderName}/client.js"></script>
+              <script type="text/javascript" src="${assetsFolderName}/client.js"></script>
             </body>
           </html>`
       );
