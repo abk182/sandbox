@@ -1,0 +1,1 @@
+module.exports = function () {console.log('HELLO FROM MODULE 2')}
