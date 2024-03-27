@@ -42,4 +42,5 @@ const fn6 = () => {
   fn4();
   console.log("fn6 end");
 };
+
 fn6();
