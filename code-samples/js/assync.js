@@ -12,28 +12,34 @@ const fn1 = () => {
   assync();
   console.log("fn1 end");
 };
-fn1();
+
 const fn2 = async () => {
   console.log("fn2 start");
   await assync();
   console.log("fn2 end");
 };
-fn2();
+
 const fn3 = async () => {
   console.log("fn3 start");
   await fn1();
   console.log("fn3 end");
 };
-fn3();
+
 const fn4 = () => {
   console.log("fn4 start");
   return assync();
   console.log("fn4 end");
 };
-fn4();
+
 const fn5 = async () => {
   console.log("fn5 start");
   await fn4();
   console.log("fn5 end");
 };
-fn5();
+
+const fn6 = () => {
+  console.log("fn6 start");
+  fn4();
+  console.log("fn6 end");
+};
+fn6();
