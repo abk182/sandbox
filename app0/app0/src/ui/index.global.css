@@ -2,8 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+}
+
 .ui {
-    background-color: beige;
+    background-color: greenyellow;
 }
 
 :root {
