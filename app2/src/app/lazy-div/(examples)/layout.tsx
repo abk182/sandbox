@@ -5,8 +5,8 @@ export default function Layout({
 }>) {
   return (
     <>
-      Example of LazyDiv usage
-      {children}
+      <h1>Example of LazyDiv usage</h1>
+      <h2>{children}</h2>
     </>
   );
 }
