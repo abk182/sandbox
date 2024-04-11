@@ -6,7 +6,7 @@ export default function Layout({
   return (
     <>
       <h1>Example of LazyDiv usage</h1>
-      <h2>{children}</h2>
+      {children}
     </>
   );
 }
