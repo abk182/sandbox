@@ -3,43 +3,44 @@ fn main() {
 }
 
 fn try_slice() {
-    fn first_word(s: &String) -> usize {
+    fn first_word(s: &str) -> &str {
         let bytes = s.as_bytes();
     
         for (i, &item) in bytes.iter().enumerate() {
             if item == b' ' {
-                return i;
+                return &s[..i];
             }
         }
     
-        s.len()
+        &s[..]
     }
 
     let mut s = String::from("hello world");
 
-    let word = first_word(&s);
+    let ss = "sss";
+
+    let word = first_word(&ss);
 
     s.clear();
 
     println!("{s}, {word}");
 
     s = String::from("hello");
-    println!("{s}");
 
     let slice = &s[0..2];
-    println!("{slice}");
+    println!("slice: {slice}");
 
     let slice = &s[..2];
-    println!("{slice}");
+    println!("slice: {slice}");
 
     let slice = &s[3..s.len()];
-    println!("{slice}");
+    println!("slice: {slice}");
 
     let slice = &s[3..];
-    println!("{slice}");
+    println!("slice: {slice}");
 
     let slice = &s[..];
-    println!("{slice}");
+    println!("slice: {slice}");
 }
 
 fn try_reference() {
