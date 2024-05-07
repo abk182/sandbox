@@ -23,6 +23,23 @@ fn try_slice() {
 
     println!("{s}, {word}");
 
+    s = String::from("hello");
+    println!("{s}");
+
+    let slice = &s[0..2];
+    println!("{slice}");
+
+    let slice = &s[..2];
+    println!("{slice}");
+
+    let slice = &s[3..s.len()];
+    println!("{slice}");
+
+    let slice = &s[3..];
+    println!("{slice}");
+
+    let slice = &s[..];
+    println!("{slice}");
 }
 
 fn try_reference() {
