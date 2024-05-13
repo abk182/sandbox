@@ -36,6 +36,9 @@ const config = {
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },
+  experiments: {
+    asyncWebAssembly: true
+  }
 };
 
 const serverConfig = Object.assign(
@@ -55,7 +58,7 @@ const clientConfig = Object.assign(
     target: "web",
     entry: "./src/client/index.tsx",
     output: {
-      filename: "assets/client.js",
+      filename: "client.js",
       path: path.resolve(__dirname, "dist"),
     },
   },

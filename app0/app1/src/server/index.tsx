@@ -5,7 +5,7 @@ import path from "path";
 import { Ui, rootDomNodeId } from "../ui";
 
 const startServer = () => {
-  const assetsFolderName = "assets";
+  const assetsFolderName = "";
   const assetsPath = `/${assetsFolderName}`;
   const port = 8081;
   const app = express();
