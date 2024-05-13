@@ -3,12 +3,15 @@ import { renderToString } from "react-dom/server";
 import express from "express";
 import path from "path";
 import { Ui, rootDomNodeId } from "../ui";
+import cors from 'cors';
 
 const startServer = () => {
   const assetsFolderName = "";
   const assetsPath = `/${assetsFolderName}`;
   const port = 8081;
   const app = express();
+
+  app.use(cors());
 
   app.use(assetsPath, express.static(path.join(__dirname, assetsPath)));
 
