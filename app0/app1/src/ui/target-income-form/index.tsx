@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { getTargetIncome } from "../../utils/get-target-salary";
+import React, { useEffect, useRef, useState } from "react";
 
 import css from "./index.css";
 
 export const TargetIncomeForm = () => {
   const [currentIncome, setCurrentIncome] = useState(0);
-  const [years, setYears] = useState(0);
+  const [years, setYears] = useState(1);
+  const [inflation, setInflation] = useState(5);
+  const [wasmReady, setWasmReady] = useState(false);
+  const wasmRef = useRef<typeof import("wasm")>(null);
   useEffect(() => {
     import("wasm")
       .then((m) => {
         return m.default;
       })
       .then((m) => {
-        console.log(m.greet());
+        wasmRef.current = m;
+        setWasmReady(true);
       });
   }, []);
 
@@ -32,8 +35,17 @@ export const TargetIncomeForm = () => {
           if (!Number.isNaN(+e.target.value)) setYears(+e.target.value);
         }}
       />
+      <input
+        placeholder="years"
+        value={inflation}
+        onChange={(e) => {
+          if (!Number.isNaN(+e.target.value)) setInflation(+e.target.value);
+        }}
+      />
       <div className="text-3xl font-bold underline">
-        {getTargetIncome(currentIncome, years)}
+        {wasmReady
+          ? wasmRef.current.calc(currentIncome, years, inflation / 100)
+          : "loading..."}
       </div>
     </div>
   );
