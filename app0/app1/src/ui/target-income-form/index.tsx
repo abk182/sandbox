@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { getTargetIncome } from "../../utils/get-target-salary";
-import '../wasm/bootstrap.js';
 
 import css from "./index.css";
 
@@ -8,14 +7,13 @@ export const TargetIncomeForm = () => {
   const [currentIncome, setCurrentIncome] = useState(0);
   const [years, setYears] = useState(0);
   useEffect(() => {
-    // const asyncEffect = async () => {
-    //   //@ts-ignore
-    //   const t = await wasm.default;
-
-    //   console.log(t);
-    // };
-
-    // asyncEffect();
+    import("wasm")
+      .then((m) => {
+        return m.default;
+      })
+      .then((m) => {
+        console.log(m.greet());
+      });
   }, []);
 
   return (

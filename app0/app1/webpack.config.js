@@ -37,8 +37,8 @@ const config = {
     extensions: [".tsx", ".ts", ".js"],
   },
   experiments: {
-    asyncWebAssembly: true
-  }
+    asyncWebAssembly: true,
+  },
 };
 
 const serverConfig = Object.assign(
