@@ -7,7 +7,7 @@ import { Ui, rootDomNodeId } from "../ui";
 const startServer = () => {
   const assetsFolderName = "assets";
   const assetsPath = `/${assetsFolderName}`;
-  const port = 8080;
+  const port = 8081;
   const app = express();
 
   app.use(assetsPath, express.static(path.join(__dirname, assetsPath)));
@@ -18,7 +18,7 @@ const startServer = () => {
           <html>
             <body>
               <div id=${rootDomNodeId}>${renderToString(<Ui />)}</div>
-              <script type="text/javascript" src="${assetsFolderName}/client.js"></script>
+              <script type="text/javascript" src="http://localhost:${port}/${assetsFolderName}/client.js"></script>
             </body>
           </html>`
     );

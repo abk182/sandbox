@@ -57,6 +57,20 @@ const clientConfig = Object.assign(
     output: {
       filename: "assets/client.js",
       path: path.resolve(__dirname, "dist"),
+      publicPath: '/',
+    },
+    devServer: {
+      static: {
+        directory: path.join(__dirname, 'dist'),
+      },
+      compress: true,
+      port: 8080,
+      proxy: [
+        {
+          context: ['/'],
+          target: 'http://localhost:8081',
+        },
+      ],
     },
   },
   config
