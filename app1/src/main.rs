@@ -3,13 +3,17 @@ fn main() {
         width: 11,
         height: 2
     };
-    println!("area: {0}", area(rect));
+
+    dbg!(&rect);
+    println!("rect {:#?}", rect);
+    println!("area: {0}", area(&rect));
 }
 
-fn area(dimensions: Rectangle) -> u32 {
+fn area(dimensions: &Rectangle) -> u32 {
     dimensions.width * dimensions.height
 }
 
+#[derive(Debug)]
 struct Rectangle {
     width: u32,
     height: u32,
