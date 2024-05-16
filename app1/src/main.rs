@@ -8,11 +8,7 @@ fn main() {
     dbg!(&rect);
     println!("rect {:#?}", rect);
     println!("area: {0}", rect.area());
-    if rect.check_area() {
-        println!("area ok")
-    } else {
-        println!("area not ok")
-    }
+    println!("area {0}", if rect.check_area() {"ok"} else {"not ok"});
     rect.take_ownership_of_self();
     // rect.take_ownership_of_sefl(); // wont work, borrowing
 }
