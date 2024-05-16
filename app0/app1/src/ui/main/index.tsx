@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import css from "./index.css";
 
-export const TargetIncomeForm = () => {
+export const Main = () => {
   const [currentIncome, setCurrentIncome] = useState(0);
   const [years, setYears] = useState(1);
   const [inflation, setInflation] = useState(5);
@@ -20,7 +20,7 @@ export const TargetIncomeForm = () => {
   }, []);
 
   return (
-    <div className={css.form}>
+    <div className={css.main}>
       <input
         placeholder="currentIncome"
         value={currentIncome}
