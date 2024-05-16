@@ -19,6 +19,9 @@ const startServer = () => {
     res.end(
       `<!DOCTYPE html>
           <html>
+          <head>
+            <link href="/main.css" rel="stylesheet" />
+          </head>
             <body>
               <div id=${rootDomNodeId}>${renderToString(<Ui />)}</div>
               <script type="text/javascript" src="${assetsFolderName}/client.js"></script>

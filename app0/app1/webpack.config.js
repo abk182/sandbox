@@ -1,4 +1,5 @@
 const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const config = {
   mode: "development",
@@ -13,7 +14,7 @@ const config = {
         test: /\.css$/,
         exclude: /\.global\.css$/,
         use: [
-          { loader: "style-loader" },
+          MiniCssExtractPlugin.loader,
           {
             loader: "css-loader",
             options: {
@@ -28,7 +29,7 @@ const config = {
       },
       {
         test: /\.global\.css$/,
-        use: ["style-loader", "css-loader", "postcss-loader"],
+        use: [MiniCssExtractPlugin.loader, , "css-loader", "postcss-loader"],
         include: path.resolve(__dirname, "src"),
       },
     ],
@@ -36,6 +37,7 @@ const config = {
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },
+  plugins: [new MiniCssExtractPlugin()],
   experiments: {
     asyncWebAssembly: true,
   },
