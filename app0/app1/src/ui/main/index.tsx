@@ -4,9 +4,11 @@ import css from "./index.css";
 import { PpmImage } from "./ppm-image";
 
 export const Main = () => {
-  const [currentIncome, setCurrentIncome] = useState(16);
-  const [years, setYears] = useState(16);
+  const [currentIncome, setCurrentIncome] = useState(100);
+  const [years, setYears] = useState(10);
   const [inflation, setInflation] = useState(5);
+  const [width, setWidth] = useState(256);
+  const [height, setHeight] = useState(256);
   const wasm = useWasm();
 
   return (
@@ -28,7 +30,7 @@ export const Main = () => {
           }}
         />
         <input
-          placeholder="years"
+          placeholder="inflation"
           value={inflation}
           onChange={(e) => {
             if (!Number.isNaN(+e.target.value)) setInflation(+e.target.value);
@@ -38,9 +40,31 @@ export const Main = () => {
           {wasm ? wasm.calc(currentIncome, years, inflation) : "loading..."}
         </div>
       </div>
-      {wasm && (
-        <PpmImage width={currentIncome} height={years} data={wasm.ppmimage(currentIncome, years)} />
-      )}
+      <div>
+        <input
+          placeholder="width"
+          value={width}
+          onChange={(e) => {
+            if (!Number.isNaN(+e.target.value)) setWidth(+e.target.value);
+          }}
+        />
+        <input
+          placeholder="height"
+          value={height}
+          onChange={(e) => {
+            if (!Number.isNaN(+e.target.value)) setHeight(+e.target.value);
+          }}
+        />
+        {wasm ? (
+          <PpmImage
+            width={width}
+            height={height}
+            data={wasm.draw_ppm_image(width, height)}
+          />
+        ) : (
+          "loading..."
+        )}
+      </div>
     </div>
   );
 };

@@ -1,3 +1,6 @@
+use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen]
 pub fn draw_ppm_image(width: u16, height: u16) -> String {
     let mut output = String::from("");
 
