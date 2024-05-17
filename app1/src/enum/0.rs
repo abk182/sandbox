@@ -1,10 +1,9 @@
 fn main() {
-
     #[derive(Debug)]
     struct StemSize {
         reach: u8,
         rise: u8,
-        oversized: bool
+        oversized: bool,
     }
 
     #[derive(Debug)]
@@ -13,7 +12,7 @@ fn main() {
         FrontLoad(StemSize),
         Unknown(String),
         Integrated,
-        Elementary {reach: u8, size: u8},
+        Elementary { reach: u8, size: u8 },
     }
 
     impl StemType {
@@ -27,10 +26,18 @@ fn main() {
         rise: u8,
     }
 
-    let stem = StemType::TopLoad(StemSize { reach: 53, rise: 34, oversized: false });
+    let stem = StemType::TopLoad(StemSize {
+        reach: 53,
+        rise: 34,
+        oversized: false,
+    });
     stem.slip();
     println!("{:?}", stem);
-    let stem = StemType::FrontLoad(StemSize { reach: 48, rise: 0, oversized: true });
+    let stem = StemType::FrontLoad(StemSize {
+        reach: 48,
+        rise: 0,
+        oversized: true,
+    });
     println!("{:?}", stem);
     let stem = StemType::Unknown(String::from("awesome stem"));
     println!("{:?}", stem);

@@ -12,7 +12,7 @@ fn get_last_word(s0: &str) -> &str {
 
     for (i, &item) in bytes.iter().enumerate() {
         if item == b' ' {
-            return get_word(&s0[i+1..]);
+            return get_word(&s0[i + 1..]);
         }
     }
 

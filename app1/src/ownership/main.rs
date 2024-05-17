@@ -5,13 +5,13 @@ fn main() {
 fn try_slice() {
     fn first_word(s: &str) -> &str {
         let bytes = s.as_bytes();
-    
+
         for (i, &item) in bytes.iter().enumerate() {
             if item == b' ' {
                 return &s[..i];
             }
         }
-    
+
         &s[..]
     }
 
@@ -46,9 +46,9 @@ fn try_slice() {
 fn try_reference() {
     let s = String::from("awesome string");
 
-    fn get_length_v1 (s: String) -> (String, usize) {
+    fn get_length_v1(s: String) -> (String, usize) {
         let length = s.len();
-    
+
         (s, length)
     }
 
@@ -56,17 +56,17 @@ fn try_reference() {
 
     println!("string :'{s1}', length: {l1}");
 
-    fn get_length_v2 (s: &String) -> usize {
+    fn get_length_v2(s: &String) -> usize {
         let length = s.len();
-    
+
         length
     }
-    
+
     let l2 = get_length_v2(&s1);
 
     println!("string :'{s1}', length: {l2}");
 
-    fn mut_str (s: &mut String) -> &mut String {
+    fn mut_str(s: &mut String) -> &mut String {
         s.push_str(", mutant");
         s
     }
@@ -95,7 +95,7 @@ fn try_ownership() {
     let s = String::from("some string");
 
     println!("{}", s);
-    
+
     let n = 0;
 
     let s1 = String::from("string");
