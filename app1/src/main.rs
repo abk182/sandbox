@@ -1,16 +1,39 @@
 fn main() {
 
     #[derive(Debug)]
-    enum IpAddr {
-        V4(u8, u8, u8, u8),
-        V6(String),
+    struct StemSize {
+        reach: u8,
+        rise: u8,
+        oversized: bool
     }
 
-    let home = IpAddr::V4(127, 0, 0, 1);
+    #[derive(Debug)]
+    enum StemType {
+        TopLoad(StemSize),
+        FrontLoad(StemSize),
+        Unknown(String),
+        Integrated,
+        Elementary {reach: u8, size: u8},
+    }
 
-    let loopback = IpAddr::V6(String::from("::1"));
+    impl StemType {
+        fn slip(&self) {
+            println!("slipped {:?}", &self);
+        }
+    }
 
-    println!("{:?}", home);
-    println!("{:?}", loopback);
-    println!("{}", loopback);
+    struct ElementaryProps {
+        reach: u8,
+        rise: u8,
+    }
+
+    let stem = StemType::TopLoad(StemSize { reach: 53, rise: 34, oversized: false });
+    stem.slip();
+    println!("{:?}", stem);
+    let stem = StemType::FrontLoad(StemSize { reach: 48, rise: 0, oversized: true });
+    println!("{:?}", stem);
+    let stem = StemType::Unknown(String::from("awesome stem"));
+    println!("{:?}", stem);
+    let stem = StemType::Integrated;
+    println!("{:?}", stem);
 }
