@@ -44,7 +44,7 @@ export const Main = () => {
       />
       <div className="text-3xl font-bold underline">
         {wasmReady
-          ? wasmRef.current.calc(currentIncome, years, inflation / 100)
+          ? wasmRef.current.calc(currentIncome, years, inflation)
           : "loading..."}
       </div>
     </div>
