@@ -3,8 +3,8 @@ fn main() {
 }
 
 enum Status {
-    Alive = 1,
-    Dead = 0
+    Alive,
+    Dead
 }
 
 struct Birth(i32, i32, i32);
