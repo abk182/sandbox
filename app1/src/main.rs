@@ -1,11 +1,22 @@
 fn main() {
-    let some_number = Some(5);
-    let some_char = Some('e');
+    enum Coin {
+        Penny,
+        Nickel,
+        Dime,
+        Quarter,
+    }
+    
+    fn value_in_cents(coin: Coin) -> u8 {
+        match coin {
+            Coin::Penny => {
+                println!("Lucky penny!");
+                1
+            }
+            Coin::Nickel => 5,
+            Coin::Dime => 10,
+            Coin::Quarter => 25,
+        }
+    }
 
-    let absent_number: Option<i32> = None;
-
-    let x: i8 = 5;
-    let y: Option<i8> = Some(5);
-
-    let sum = x + y; // break
+    value_in_cents(Coin::Penny);
 }
