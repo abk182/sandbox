@@ -1,5 +1,7 @@
+pub mod ppmimage;
 mod utils;
 
+use ppmimage::draw_ppm_image;
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
@@ -17,4 +19,9 @@ pub fn calc(current_income: f32, years: u8, inflation: u8) -> f32 {
     }
 
     calculated_income
+}
+
+#[wasm_bindgen]
+pub fn ppmimage(width: u16, height: u16) -> String {
+    draw_ppm_image(width, height)
 }
