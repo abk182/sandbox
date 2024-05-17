@@ -28,8 +28,9 @@ fn main() {
 
     fn get_val(val: Option<i32>) -> i32 {
         match val {
-            None => 0,
             Some(i) => i,
+            // None => 0,
+            _ => 0
         }
     }
     let raw_val = 1;
