@@ -2,6 +2,18 @@ import React, { useEffect, useRef, useState } from "react";
 
 import css from "./index.css";
 
+const calc = (currentIncome, years, inflation) => {
+  let currentYear = 0;
+  let calculatedIncome = currentIncome;
+  while (currentYear < years) {
+    calculatedIncome = calculatedIncome * (1.0 + inflation);
+
+    currentYear += 1;
+  }
+
+  return calculatedIncome;
+};
+
 export const Main = () => {
   const [currentIncome, setCurrentIncome] = useState(0);
   const [years, setYears] = useState(1);
@@ -46,6 +58,9 @@ export const Main = () => {
         {wasmReady
           ? wasmRef.current.calc(currentIncome, years, inflation / 100)
           : "loading..."}
+      </div>
+      <div className="text-3xl font-bold underline">
+        {calc(currentIncome, years, inflation / 100)}
       </div>
     </div>
   );
