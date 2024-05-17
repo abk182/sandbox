@@ -4,14 +4,12 @@ fn main() {
         Alabama,
         Alaska,
     }
-
     enum Coin {
         Penny,
         Nickel,
         Dime,
         Quarter(UsState),
     }
-
     fn value_in_cents(coin: Coin) -> u8 {
         match coin {
             Coin::Penny => {
@@ -26,6 +24,15 @@ fn main() {
             }
         }
     }
-
     value_in_cents(Coin::Quarter(UsState::Alabama));
+
+    fn get_val(val: Option<i32>) -> i32 {
+        match val {
+            None => 0,
+            Some(i) => i
+        }
+    }
+    let raw_val = 1;
+    let val = Some(raw_val);
+    println!("{0}", 1 + get_val(val) + get_val(None));
 }
