@@ -30,10 +30,17 @@ fn main() {
         match val {
             Some(i) => i,
             // None => 0,
-            _ => 0
+            _ => 0,
         }
     }
     let raw_val = 1;
     let val = Some(raw_val);
     println!("{0}", 1 + get_val(val) + get_val(None));
+
+    let max = Some(3u8);
+    if let Some(max) = max {
+        println!("max: {}", max);
+    } else {
+        println!("no max");
+    }
 }
