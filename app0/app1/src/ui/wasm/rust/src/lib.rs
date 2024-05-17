@@ -8,13 +8,13 @@ extern "C" {
 }
 
 #[wasm_bindgen]
-pub fn calc(currentIncome: f32, years: u8, inflation: f32) -> f32 {
-    let mut currentYear = 0;
-    let mut calculatedIncome = currentIncome;
-    while currentYear < years {
-        calculatedIncome = calculatedIncome * (1.0 + inflation);
-        currentYear += 1;
+pub fn calc(current_income: f32, years: u8, inflation: u8) -> f32 {
+    let mut current_year = 0;
+    let mut calculated_income = current_income;
+    while current_year < years {
+        calculated_income = calculated_income * (1.0 + inflation as f32 / 100.0);
+        current_year += 1;
     }
 
-    calculatedIncome
+    calculated_income
 }

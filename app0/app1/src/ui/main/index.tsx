@@ -6,7 +6,7 @@ const calc = (currentIncome, years, inflation) => {
   let currentYear = 0;
   let calculatedIncome = currentIncome;
   while (currentYear < years) {
-    calculatedIncome = calculatedIncome * (1.0 + inflation);
+    calculatedIncome = calculatedIncome * (1.0 + inflation / 100);
 
     currentYear += 1;
   }
@@ -56,11 +56,11 @@ export const Main = () => {
       />
       <div className="text-3xl font-bold underline">
         {wasmReady
-          ? wasmRef.current.calc(currentIncome, years, inflation / 100)
+          ? wasmRef.current.calc(currentIncome, years, inflation)
           : "loading..."}
       </div>
       <div className="text-3xl font-bold underline">
-        {calc(currentIncome, years, inflation / 100)}
+        {calc(currentIncome, years, inflation)}
       </div>
     </div>
   );
