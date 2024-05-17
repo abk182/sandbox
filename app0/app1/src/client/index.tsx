@@ -10,5 +10,10 @@ if (document.getElementById("app0.app0")) {
   const root = createRoot(rootDomNode);
   root.render(<Ui />);
 } else {
-  hydrateRoot(document.getElementById(rootDomNodeId), <Ui />);
+  const rootDomNode = document.getElementById(rootDomNodeId);
+  if (rootDomNode) {
+    hydrateRoot(rootDomNode, <Ui />);
+  } else {
+    console.error('rootDomNode is undefined')
+  }
 }

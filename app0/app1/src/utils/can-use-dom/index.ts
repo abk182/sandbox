@@ -3,7 +3,7 @@ export const canUseDom = () => {
     if (
       typeof window !== "undefined" &&
       window.document &&
-      window.document.createElement
+      window.document['createElement']
     ) {
       return true;
     }
