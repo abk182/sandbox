@@ -1,39 +1,11 @@
 fn main() {
+    let some_number = Some(5);
+    let some_char = Some('e');
 
-    #[derive(Debug)]
-    struct StemSize {
-        reach: u8,
-        rise: u8,
-        oversized: bool
-    }
+    let absent_number: Option<i32> = None;
 
-    #[derive(Debug)]
-    enum StemType {
-        TopLoad(StemSize),
-        FrontLoad(StemSize),
-        Unknown(String),
-        Integrated,
-        Elementary {reach: u8, size: u8},
-    }
+    let x: i8 = 5;
+    let y: Option<i8> = Some(5);
 
-    impl StemType {
-        fn slip(&self) {
-            println!("slipped {:?}", &self);
-        }
-    }
-
-    struct ElementaryProps {
-        reach: u8,
-        rise: u8,
-    }
-
-    let stem = StemType::TopLoad(StemSize { reach: 53, rise: 34, oversized: false });
-    stem.slip();
-    println!("{:?}", stem);
-    let stem = StemType::FrontLoad(StemSize { reach: 48, rise: 0, oversized: true });
-    println!("{:?}", stem);
-    let stem = StemType::Unknown(String::from("awesome stem"));
-    println!("{:?}", stem);
-    let stem = StemType::Integrated;
-    println!("{:?}", stem);
+    let sum = x + y; // break
 }
