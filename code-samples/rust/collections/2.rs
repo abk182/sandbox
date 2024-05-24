@@ -1,7 +1,6 @@
 fn main() {
-    let str = String::from("hello awesome world");
-
-    println!("{}", convert_phrase_to_pig_latin(str));
+    println!("{}", convert_phrase_to_pig_latin(String::from("hello awesome world")));
+    println!("{}", convert_phrase_to_pig_latin(String::from("привет успешные")));
 }
 
 fn convert_phrase_to_pig_latin(phrase: String) -> String {
@@ -18,18 +17,21 @@ fn convert_phrase_to_pig_latin(phrase: String) -> String {
 }
 
 fn convert_word_to_pig_latin(word: String) -> String {
-    let consonants = vec!["H", "w"];
-    let vowels = vec!["a"];
-    let first_letter = &word[..1];
+    let consonants = vec!['h', 'w', 'п'];
+    let vowels = vec!['a', 'у'];
     let mut pig_latin_word = String::new();
-    println!("{first_letter}");
+    let mut letters = word.chars();
+    let first_letter = letters.next().unwrap();
 
     if vowels.contains(&first_letter) {
-        pig_latin_word.push_str(&format!("{}-hay", &word))
+        pig_latin_word.push_str(&format!("{}-hay", word))
     }
 
     if consonants.contains(&first_letter) {
-        pig_latin_word.push_str(&format!("{}-{}ay", &word[1..], &word[..1]))
+        for letter in letters {
+            pig_latin_word.push(letter)
+        }
+        pig_latin_word.push_str(&format!("-{}ay", first_letter))
     }
 
     pig_latin_word
