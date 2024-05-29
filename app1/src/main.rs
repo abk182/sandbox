@@ -1,4 +1,4 @@
-use app1::aggregator::{Summary, Tweet, NewsArticle};
+use app1::aggregator::{Summary, Tweet, NewsArticle, notify};
 fn main() {
     let tweet = Tweet {
         username: String::from("horse_ebooks"),
@@ -8,8 +8,8 @@ fn main() {
         reply: false,
         retweet: false,
     };
-
     println!("1 new tweet: {}", tweet.summarize());
+    notify(&tweet);
 
     let article = NewsArticle {
         headline: String::from("Penguins win the Stanley Cup Championship!"),
@@ -20,6 +20,6 @@ fn main() {
              hockey team in the NHL.",
         ),
     };
-
     println!("New article available! {}", article.summarize());
+    notify(&article);
 }
