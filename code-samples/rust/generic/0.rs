@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 #[derive(Debug)]
 struct Point<T, U> {
     x: T,
@@ -16,8 +18,9 @@ impl Point<f32, f32> {
     }
 }
 
-impl<T: Copy> Point<T, T> {
+impl<T: Copy + Display> Point<T, T> {
     fn mix(&mut self) -> Point<T, T> {
+        println!("self.x = {}", self.x);
         let prev_x = self.x;
         self.x = self.y;
         self.y = prev_x;
