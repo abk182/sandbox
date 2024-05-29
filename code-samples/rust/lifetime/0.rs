@@ -1,8 +1,15 @@
 fn main() {
-    let string1 = String::from("abcd");
-    let string2 = "xyz";
+    let string1;
+    let mut string2; 
+    string1 = String::from("long string is long");
+    let result;
 
-    let result = longest(string1.as_str(), string2);
+    {
+        string2 = String::from("xyz");
+        result = longest(&string1, &string2);
+        println!("The longest string is {}", result);
+    }
+
     println!("The longest string is {}", result);
 }
 
