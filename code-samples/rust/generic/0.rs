@@ -16,14 +16,14 @@ impl Point<f32, f32> {
     }
 }
 
-impl Point<f32, f32> {
-    fn mix(&mut self) -> Point<f32, f32> {
+impl<T: Copy> Point<T, T> {
+    fn mix(&mut self) -> Point<T, T> {
         let prev_x = self.x;
         self.x = self.y;
         self.y = prev_x;
         Point {
             x: self.y,
-            y: self.x
+            y: self.x,
         }
     }
 }
@@ -32,7 +32,7 @@ impl<X1, Y1> Point<X1, Y1> {
     fn mixup<X2, Y2>(self, other_point: Point<X2, Y2>) -> Point<X1, Y2> {
         Point {
             x: self.x,
-            y: other_point.y
+            y: other_point.y,
         }
     }
 }
@@ -40,15 +40,14 @@ impl<X1, Y1> Point<X1, Y1> {
 fn main() {
     let mut p0 = Point { x: 5.0, y: 10.0 };
     p0.mix();
-    let p1 = Point { x: 5, y: 10 };
+    println!("x = {}", p0.x());
+
+    let p1 = Point { x: 51.2, y: 100.1 };
+    println!("distance_from_origin = {}", p1.distance_from_origin());
+    
     let p2 = Point { x: 'a', y: 'b' };
     let p3 = p2.mixup(p1);
-    println!(
-        "p0.x = {}, distance_from_origin = {}, p3 = {:?}",
-        p0.x(),
-        p0.distance_from_origin(),
-        p3
-    );
+    println!("p3 = {:?}", p3);
 
     let number_list = vec![34, 50, 25, 100, 65];
 
