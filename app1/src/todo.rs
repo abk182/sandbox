@@ -30,6 +30,9 @@ impl Todo {
         Ok(())
     }
 
+    pub fn get_todo(&self, date_from: &str, date_to: &str) {
+    }
+
     fn file_name(&self) -> Result<String, io::Error> {
         Ok(format!(
             "{}/{}.{}",
