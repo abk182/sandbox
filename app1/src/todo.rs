@@ -23,11 +23,20 @@ impl Todo {
     }
 
     pub fn add_todo(&self, text: String) -> Result<(), io::Error> {
-        let new_todo_id = self.generate_new_todo_id()?;
-        let file_name = format!("{}/{}.{}", &self.dir, new_todo_id, &self.extension);
-        let mut file = fs::File::create(file_name)?;
-        file.write_all(text.as_bytes())?;
+        let timestamp = chrono::offset::Local::now().timestamp();
+        let content = String::from(format!("{}\n{}", timestamp, text));
+        let mut file = fs::File::create(self.file_name()?)?;
+        file.write_all(content.as_bytes())?;
         Ok(())
+    }
+
+    fn file_name(&self) -> Result<String, io::Error> {
+        Ok(format!(
+            "{}/{}.{}",
+            &self.dir,
+            self.new_todo_id()?,
+            &self.extension
+        ))
     }
 
     fn list_files(&self) -> Result<Vec<String>, io::Error> {
@@ -46,13 +55,12 @@ impl Todo {
         Ok(vector)
     }
 
-    fn generate_new_todo_id(&self) -> Result<i32, io::Error> {
+    fn new_todo_id(&self) -> Result<i32, io::Error> {
         let mut list = self.list_files()?;
         list.sort();
 
-
         if list.len() > 0 {
-            let extension = String::from(format!(".{}",self.extension));
+            let extension = String::from(format!(".{}", self.extension));
             let mut last_id: i32 = list[list.len() - 1]
                 .replace(&extension, "")
                 .parse()
