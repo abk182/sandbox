@@ -27,20 +27,17 @@ impl Todos {
 
     pub fn add_todo(&self, text: String) -> Result<(), io::Error> {
         let todo = Todo::new(text);
-        todo.write_to_file(self.file_name()?)?;
+        todo.write_to_file(self.get_file_name_by_id(self.generate_todo_id()?))?;
         Ok(())
     }
 
-    pub fn get_todos(&self, date_from: &str, date_to: &str) {
+    pub fn get_todo(&self, id: i32) -> Result<Todo, io::Error> {
+        let str = Todo::read_from_file(self.get_file_name_by_id(id))?;
+        Ok(str)
     }
 
-    fn file_name(&self) -> Result<String, io::Error> {
-        Ok(format!(
-            "{0}/{1}.{2}",
-            &self.dir,
-            self.generate_todo_id()?,
-            &self.extension
-        ))
+    fn get_file_name_by_id(&self, id: i32) -> String {
+        format!("{0}/{1}.{2}", &self.dir, id, &self.extension)
     }
 
     fn list_files(&self) -> Result<Vec<String>, io::Error> {
