@@ -1,6 +1,8 @@
-use std::fs;
-use std::io;
-use std::io::{Read, Write};
+use std::{fmt, fs};
+use std::{
+    io,
+    io::{Read, Write},
+};
 
 const DATE_FORMAT: &str = "%Y-%m-%d %H:%M:%S %z";
 
@@ -40,11 +42,14 @@ impl Todo {
         file.write_all(content.as_bytes())?;
         Ok(&self)
     }
+}
 
-    pub fn format(&self) -> String {
+impl fmt::Display for Todo {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let mut output = String::new();
         output.push_str(&format!("\nDate: \n{}\n", self.date.format(DATE_FORMAT),));
         output.push_str(&format!("\nContent: \n{}\n", self.content));
-        output
+
+        write!(f, "{}", output)
     }
 }

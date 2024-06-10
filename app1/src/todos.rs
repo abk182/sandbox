@@ -19,9 +19,6 @@ impl Todos {
             dir,
             extension: String::from("txt"),
         };
-
-        println!("{:?}", todos);
-
         Ok(todos)
     }
 
