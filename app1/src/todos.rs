@@ -1,43 +1,44 @@
+use todo::Todo;
+
 use crate::dir::use_dir;
 use std::fs;
 use std::io;
-use std::io::Write;
+
+mod todo;
 
 #[derive(Debug)]
-pub struct Todo {
+pub struct Todos {
     dir: String,
     extension: String,
 }
 
-impl Todo {
-    pub fn new() -> Result<Todo, io::Error> {
+impl Todos {
+    pub fn new() -> Result<Todos, io::Error> {
         let dir = use_dir(None)?;
-        let todo = Todo {
+        let todos = Todos {
             dir,
             extension: String::from("txt"),
         };
 
-        println!("{:?}", todo);
+        println!("{:?}", todos);
 
-        Ok(todo)
+        Ok(todos)
     }
 
     pub fn add_todo(&self, text: String) -> Result<(), io::Error> {
-        let timestamp = chrono::offset::Local::now().timestamp();
-        let content = String::from(format!("{}\n{}", timestamp, text));
-        let mut file = fs::File::create(self.file_name()?)?;
-        file.write_all(content.as_bytes())?;
+        let todo = Todo::new(text);
+        todo.write_to_file(self.file_name()?)?;
         Ok(())
     }
 
-    pub fn get_todo(&self, date_from: &str, date_to: &str) {
+    pub fn get_todos(&self, date_from: &str, date_to: &str) {
     }
 
     fn file_name(&self) -> Result<String, io::Error> {
         Ok(format!(
-            "{}/{}.{}",
+            "{0}/{1}.{2}",
             &self.dir,
-            self.new_todo_id()?,
+            self.generate_todo_id()?,
             &self.extension
         ))
     }
@@ -58,7 +59,7 @@ impl Todo {
         Ok(vector)
     }
 
-    fn new_todo_id(&self) -> Result<i32, io::Error> {
+    fn generate_todo_id(&self) -> Result<i32, io::Error> {
         let mut list = self.list_files()?;
         list.sort();
 

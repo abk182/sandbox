@@ -1,12 +1,13 @@
 use std::io;
-use todo::Todo;
+use todos::Todos;
 
 mod dir;
-mod todo;
+mod todos;
 
 pub fn run() -> Result<(), io::Error> {
-    let todo = Todo::new()?;
-    todo.add_todo(String::from("awesome todo"))?;
+    let todos = Todos::new()?;
+    todos.add_todo(String::from("awesome todo"))?;
+    todos.get_todos("10.06.2024T23:59", "10.06.2024T00:00");
 
     Ok(())
 }
