@@ -1,8 +1,7 @@
-use todo::Todo;
-
+use crate::constants::DATE_FORMAT;
 use crate::dir::use_dir;
-use std::fs;
-use std::io;
+use std::{fs, io};
+use todo::Todo;
 
 mod todo;
 
@@ -24,16 +23,41 @@ impl Todos {
 
     pub fn add_todo(&self, text: String) -> Result<(), io::Error> {
         let todo = Todo::new(text);
-        todo.write_to_file(self.get_file_name_by_id(self.generate_todo_id()?))?;
+        todo.write_to_file(&self.file_path_by_id(self.generate_todo_id()?))?;
         Ok(())
     }
 
     pub fn get_todo(&self, id: i32) -> Result<Todo, io::Error> {
-        let str = Todo::read_from_file(self.get_file_name_by_id(id))?;
+        let str = Todo::read_from_file(&self.file_path_by_id(id))?;
         Ok(str)
     }
 
-    fn get_file_name_by_id(&self, id: i32) -> String {
+    pub fn search_todo_in_date_range(
+        &self,
+        date_from: &str,
+        date_to: &str,
+    ) -> Result<Vec<Todo>, io::Error> {
+        let mut output: Vec<Todo> = vec![];
+        let from = chrono::DateTime::parse_from_str(date_from, DATE_FORMAT)
+            .unwrap()
+            .timestamp();
+        let to = chrono::DateTime::parse_from_str(date_to, DATE_FORMAT)
+            .unwrap()
+            .timestamp();
+
+        for file in self.list_files()? {
+            let todo = Todo::read_from_file(&format!("{0}/{1}", &self.dir, file))?;
+            let now = todo.date.timestamp();
+
+            if now > from && now < to {
+                output.push(todo);
+            }
+        }
+
+        Ok(output)
+    }
+
+    fn file_path_by_id(&self, id: i32) -> String {
         format!("{0}/{1}.{2}", &self.dir, id, &self.extension)
     }
 

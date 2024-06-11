@@ -1,14 +1,13 @@
+use crate::constants::DATE_FORMAT;
 use std::{fmt, fs};
 use std::{
     io,
     io::{Read, Write},
 };
 
-const DATE_FORMAT: &str = "%Y-%m-%d %H:%M:%S %z";
-
 #[derive(Debug)]
 pub struct Todo {
-    date: chrono::DateTime<chrono::Local>,
+    pub date: chrono::DateTime<chrono::Local>,
     content: String,
 }
 
@@ -20,7 +19,7 @@ impl Todo {
         }
     }
 
-    pub fn read_from_file(file_name: String) -> Result<Todo, io::Error> {
+    pub fn read_from_file(file_name: &str) -> Result<Todo, io::Error> {
         let mut content = String::new();
         fs::File::open(file_name)?.read_to_string(&mut content)?;
         let (date, content) = content.split_once("\n").unwrap();
@@ -32,7 +31,7 @@ impl Todo {
         })
     }
 
-    pub fn write_to_file(&self, file_name: String) -> Result<&Self, io::Error> {
+    pub fn write_to_file(&self, file_name: &str) -> Result<&Self, io::Error> {
         let content = String::from(format!(
             "{}\n{}",
             self.date.format(DATE_FORMAT),
