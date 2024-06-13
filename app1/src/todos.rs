@@ -1,5 +1,5 @@
 use crate::constants::DATE_FORMAT;
-use crate::dir::use_dir;
+use crate::utils::use_dir;
 use std::{fs, io};
 use todo::Todo;
 

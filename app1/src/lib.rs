@@ -2,7 +2,7 @@ use std::io::{self, Write};
 use todos::Todos;
 
 mod constants;
-mod dir;
+mod utils;
 mod todos;
 
 pub fn run() -> Result<(), io::Error> {
