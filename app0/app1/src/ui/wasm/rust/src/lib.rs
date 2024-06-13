@@ -1,5 +1,5 @@
 pub mod calc;
-pub mod ppmimage;
+pub mod cube;
 mod utils;
 use wasm_bindgen::prelude::*;
 

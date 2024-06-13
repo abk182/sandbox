@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 import { useWasm } from "../wasm/use-wasm";
 import css from "./index.css";
-import { PpmImage } from "./ppm-image";
+import { Cube } from "./cube";
 
 export const Main = () => {
   const [currentIncome, setCurrentIncome] = useState(100);
   const [years, setYears] = useState(10);
   const [inflation, setInflation] = useState(5);
-  const [width, setWidth] = useState(256);
-  const [height, setHeight] = useState(256);
   const wasm = useWasm();
 
   return (
     <div className={css.main}>
-      <div>
+      <div className={css.salary}>
         <input
           placeholder="currentIncome"
           value={currentIncome}
@@ -40,31 +38,7 @@ export const Main = () => {
           {wasm ? wasm.calc(currentIncome, years, inflation) : "loading..."}
         </div>
       </div>
-      <div>
-        <input
-          placeholder="width"
-          value={width}
-          onChange={(e) => {
-            if (!Number.isNaN(+e.target.value)) setWidth(+e.target.value);
-          }}
-        />
-        <input
-          placeholder="height"
-          value={height}
-          onChange={(e) => {
-            if (!Number.isNaN(+e.target.value)) setHeight(+e.target.value);
-          }}
-        />
-        {wasm ? (
-          <PpmImage
-            width={width}
-            height={height}
-            data={wasm.draw_ppm_image(width, height)}
-          />
-        ) : (
-          "loading..."
-        )}
-      </div>
+      <Cube></Cube>
     </div>
   );
 };
