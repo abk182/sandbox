@@ -1,6 +1,5 @@
 use cgmath::{Matrix4, Point3, Rad, Vector4};
 use image::{ImageBuffer, Rgb};
-use std::{fs::File, path::Path};
 use wasm_bindgen::prelude::*;
 
 const BACKGROUND_COLOR: Rgb<u8> = Rgb([255, 255, 255]);
