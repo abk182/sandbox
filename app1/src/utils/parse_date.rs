@@ -1,9 +1,9 @@
+// use crate::constants::DATE_FORMAT;
 use chrono::{DateTime, Local, NaiveDate, NaiveDateTime, TimeZone};
 use regex::Regex;
-use std::str::FromStr;
-use crate::constants::DATE_FORMAT;
+use std::io::{self, ErrorKind};
 
-fn parse_with_multiple_formats(date_str: &str) -> Result<DateTime<Local>, &'static str> {
+pub fn parse_with_multiple_formats(date_str: &str) -> Result<DateTime<Local>, io::Error> {
     let date_formats = [
         "%d.%m.%Y",
         "%Y-%m-%d",
@@ -29,23 +29,25 @@ fn parse_with_multiple_formats(date_str: &str) -> Result<DateTime<Local>, &'stat
         for i in 1..=cap.len() {
             if let Some(matched_str) = cap.get(i) {
                 let matched_str = matched_str.as_str();
-                
+
                 // Проверка форматов даты без времени
                 for &format in &date_formats {
                     if let Ok(naive_date) = NaiveDate::parse_from_str(matched_str, format) {
-                        return Local.from_local_datetime(&naive_date.and_hms(0, 0, 0))
+                        return Local
+                            .from_local_datetime(&naive_date.and_hms(0, 0, 0))
                             .single()
-                            .ok_or("Conversion error");
+                            .ok_or(io::Error::new(ErrorKind::Other, "date parsing error"));
                     }
                 }
 
                 // Проверка форматов даты с временем
                 for &format in &date_time_formats {
-                    if let Ok(naive_date_time) = NaiveDateTime::parse_from_str(matched_str, format) {
+                    if let Ok(naive_date_time) = NaiveDateTime::parse_from_str(matched_str, format)
+                    {
                         return Local
                             .from_local_datetime(&naive_date_time)
                             .single()
-                            .ok_or("Conversion error");
+                            .ok_or(io::Error::new(ErrorKind::Other, "date parsing error"));
                     }
                 }
             }
@@ -53,7 +55,7 @@ fn parse_with_multiple_formats(date_str: &str) -> Result<DateTime<Local>, &'stat
     }
 
     eprintln!("Error parsing date string: {}", date_str);
-    Err("Parse error")
+    Err(io::Error::new(ErrorKind::Other, "date parsing error"))
 }
 
 #[cfg(test)]
@@ -63,13 +65,13 @@ mod tests {
     #[test]
     fn try_various_date_formats() {
         let date_strs = [
-        "The meeting is scheduled for 16.12.1999 at 10:30:45.",
-        "Conference date: 1999-12-16 14:00:00",
-        "Event on 12/16/1999 19:45:30!",
-    ];
+            "The meeting is scheduled for 16.12.1999 at 10:30:45.",
+            "Conference date: 1999-12-16 14:00:00",
+            "Event on 12/16/1999 19:45:30!",
+        ];
 
-    for date_str in &date_strs {
-        assert!(parse_with_multiple_formats(date_str).is_ok())
-    }
+        for date_str in &date_strs {
+            assert!(parse_with_multiple_formats(date_str).is_ok())
+        }
     }
 }

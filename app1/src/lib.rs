@@ -11,7 +11,7 @@ pub fn run() -> Result<(), io::Error> {
 
     loop {
         input.clear();
-        print!("command (add|get|exit): ");
+        print!("command (add|get|find|exit): ");
         io::stdout().flush()?;
         io::stdin().read_line(&mut input)?;
 
@@ -36,6 +36,22 @@ pub fn run() -> Result<(), io::Error> {
 
                 // todo: fix .clone()
                 todos.add_todo(String::from(input.clone()))?;
+            }
+            "find" => {
+                input.clear();
+                print!("date_from: ");
+                io::stdout().flush()?;
+                io::stdin().read_line(&mut input)?;
+                let from = input.clone();
+                
+                input.clear();
+                print!("date_to: ");
+                io::stdout().flush()?;
+                io::stdin().read_line(&mut input)?;
+                let to = input.clone();
+
+                let list = todos.search_todo_in_date_range(&from, &to)?;
+                println!("{:?}", list)
             }
             "exit" => {
                 println!("exited");

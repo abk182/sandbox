@@ -1,4 +1,4 @@
-use crate::constants::DATE_FORMAT;
+use crate::{utils::parse_with_multiple_formats};
 use crate::utils::use_dir;
 use std::{fs, io};
 use todo::Todo;
@@ -38,17 +38,12 @@ impl Todos {
         date_to: &str,
     ) -> Result<Vec<Todo>, io::Error> {
         let mut output: Vec<Todo> = vec![];
-        let from = chrono::DateTime::parse_from_str(date_from, DATE_FORMAT)
-            .unwrap()
-            .timestamp();
-        let to = chrono::DateTime::parse_from_str(date_to, DATE_FORMAT)
-            .unwrap()
-            .timestamp();
+        let from = parse_with_multiple_formats(date_from)?.timestamp();
+        let to = parse_with_multiple_formats(date_to)?.timestamp();
 
         for file in self.list_files()? {
             let todo = Todo::read_from_file(&format!("{0}/{1}", &self.dir, file))?;
             let now = todo.date.timestamp();
-
             if now > from && now < to {
                 output.push(todo);
             }
