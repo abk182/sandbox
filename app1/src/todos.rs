@@ -21,10 +21,10 @@ impl Todos {
         Ok(todos)
     }
 
-    pub fn add_todo(&self, text: String) -> Result<(), io::Error> {
+    pub fn add_todo(&self, text: String) -> Result<Todo, io::Error> {
         let todo = Todo::new(text);
         todo.write_to_file(&self.file_path_by_id(self.generate_todo_id()?))?;
-        Ok(())
+        Ok(todo)
     }
 
     pub fn get_todo(&self, id: i32) -> Result<Todo, io::Error> {
@@ -32,10 +32,10 @@ impl Todos {
         Ok(todo)
     }
 
-    pub fn delete_todo(&self, id: i32) -> Result<(), io::Error> {
+    pub fn delete_todo(&self, id: i32) -> Result<Todo, io::Error> {
         let todo = self.get_todo(id)?;
-        let todo = todo.delete_file(&self.file_path_by_id(id))?;
-        Ok(())
+        todo.delete_file(&self.file_path_by_id(id))?;
+        Ok(todo)
     }
 
     pub fn search_todo_in_date_range(

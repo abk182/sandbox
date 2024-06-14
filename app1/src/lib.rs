@@ -35,7 +35,8 @@ pub fn run() -> Result<(), io::Error> {
                 io::stdin().read_line(&mut input)?;
 
                 // todo: fix .clone()
-                todos.add_todo(String::from(input.clone()))?;
+                let todo = todos.add_todo(String::from(input.clone()))?;
+                println!("added {:?}", todo);
             }
             "delete" => {
                 input.clear();
@@ -45,7 +46,7 @@ pub fn run() -> Result<(), io::Error> {
 
                 let id = input.trim().parse::<i32>().unwrap();
                 let todo = todos.delete_todo(id)?;
-                println!("deleted {}", id);
+                println!("deleted {:?}", todo);
             }
             "find" => {
                 input.clear();
