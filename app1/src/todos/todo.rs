@@ -12,10 +12,10 @@ pub struct Todo {
 }
 
 impl Todo {
-    pub fn new(content: String) -> Todo {
+    pub fn new(content: &str) -> Todo {
         Todo {
             date: chrono::offset::Local::now(),
-            content,
+            content: String::from(content),
         }
     }
 

@@ -21,8 +21,8 @@ impl Todos {
         Ok(todos)
     }
 
-    pub fn add_todo(&self, text: String) -> Result<Todo, io::Error> {
-        let todo = Todo::new(text);
+    pub fn add_todo(&self, text: &str) -> Result<Todo, io::Error> {
+        let todo = Todo::new(&text);
         todo.write_to_file(&self.file_path_by_id(self.generate_todo_id()?))?;
         Ok(todo)
     }

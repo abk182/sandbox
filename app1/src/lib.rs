@@ -2,8 +2,8 @@ use std::io::{self, Write};
 use todos::Todos;
 
 mod constants;
-mod utils;
 mod todos;
+mod utils;
 
 pub fn run() -> Result<(), io::Error> {
     let mut input = String::new();
@@ -34,8 +34,7 @@ pub fn run() -> Result<(), io::Error> {
                 io::stdout().flush()?;
                 io::stdin().read_line(&mut input)?;
 
-                // todo: fix .clone()
-                let todo = todos.add_todo(String::from(input.clone()))?;
+                let todo = todos.add_todo(&input)?;
                 println!("added {:?}", todo);
             }
             "delete" => {
@@ -54,7 +53,7 @@ pub fn run() -> Result<(), io::Error> {
                 io::stdout().flush()?;
                 io::stdin().read_line(&mut input)?;
                 let from = input.clone();
-                
+
                 input.clear();
                 print!("date_to: ");
                 io::stdout().flush()?;
