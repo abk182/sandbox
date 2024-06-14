@@ -32,7 +32,7 @@ impl Todo {
     }
 
     pub fn delete_file(&self, file_name: &str) -> Result<&Self, io::Error> {
-        let mut file = fs::remove_file(file_name)?;
+        fs::remove_file(file_name)?;
         Ok(&self)
     }
 
