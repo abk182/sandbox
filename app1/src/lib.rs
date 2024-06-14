@@ -60,7 +60,7 @@ pub fn run() -> Result<(), io::Error> {
                 io::stdin().read_line(&mut input)?;
                 let to = input.clone();
 
-                let list = todos.search_todo_in_date_range(&from, &to)?;
+                let list = todos.search_todo_in_date_range(&from.trim(), &to.trim())?;
                 println!("{:?}", list)
             }
             "exit" => {
