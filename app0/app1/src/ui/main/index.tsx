@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useWasm } from "../wasm/use-wasm";
 import css from "./index.css";
 import { Cube } from "./cube";

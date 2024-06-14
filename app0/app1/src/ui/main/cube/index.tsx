@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useWasm } from "../../wasm/use-wasm";
 import { Image } from "../image";
 import styles from "./style.css";
@@ -10,6 +10,25 @@ export const Cube = () => {
   const [x, setX] = useState(10);
   const [y, setY] = useState(10);
   const [z, setZ] = useState(10);
+  const [animated, setAnimated] = useState(false);
+
+  useEffect(() => {
+    let interval;
+
+    if (animated && wasm) {
+      interval = setInterval(() => {
+        setY((y) => y + 1);
+        setX((x) => x + 2);
+        setZ((z) => z + 3);
+      }, 20);
+    }
+
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, [wasm, animated]);
 
   return (
     <div className={styles.cube}>
@@ -54,8 +73,15 @@ export const Cube = () => {
             if (!Number.isNaN(+e.target.value)) setZ(+e.target.value);
           }}
         />
+        <button
+          onClick={() => {
+            setAnimated(!animated);
+          }}
+        >
+          {animated ? "Stop" : "Start"}
+        </button>
       </div>
-      {wasm ? (
+      {wasm && height > 0 && width > 0 ? (
         <Image
           width={width}
           height={height}
