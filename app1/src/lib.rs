@@ -11,7 +11,7 @@ pub fn run() -> Result<(), io::Error> {
 
     loop {
         input.clear();
-        print!("command (add|get|find|exit): ");
+        print!("command (get|add|delete|find|exit): ");
         io::stdout().flush()?;
         io::stdin().read_line(&mut input)?;
 
@@ -20,7 +20,7 @@ pub fn run() -> Result<(), io::Error> {
         match command {
             "get" => {
                 input.clear();
-                print!("get: ");
+                print!("todo_id: ");
                 io::stdout().flush()?;
                 io::stdin().read_line(&mut input)?;
 
@@ -30,12 +30,22 @@ pub fn run() -> Result<(), io::Error> {
             }
             "add" => {
                 input.clear();
-                print!("add: ");
+                print!("content: ");
                 io::stdout().flush()?;
                 io::stdin().read_line(&mut input)?;
 
                 // todo: fix .clone()
                 todos.add_todo(String::from(input.clone()))?;
+            }
+            "delete" => {
+                input.clear();
+                print!("todo_id: ");
+                io::stdout().flush()?;
+                io::stdin().read_line(&mut input)?;
+
+                let id = input.trim().parse::<i32>().unwrap();
+                let todo = todos.delete_todo(id)?;
+                println!("deleted {}", id);
             }
             "find" => {
                 input.clear();

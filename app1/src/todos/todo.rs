@@ -31,6 +31,11 @@ impl Todo {
         })
     }
 
+    pub fn delete_file(&self, file_name: &str) -> Result<&Self, io::Error> {
+        let mut file = fs::remove_file(file_name)?;
+        Ok(&self)
+    }
+
     pub fn write_to_file(&self, file_name: &str) -> Result<&Self, io::Error> {
         let content = String::from(format!(
             "{}\n{}",

@@ -28,8 +28,14 @@ impl Todos {
     }
 
     pub fn get_todo(&self, id: i32) -> Result<Todo, io::Error> {
-        let str = Todo::read_from_file(&self.file_path_by_id(id))?;
-        Ok(str)
+        let todo = Todo::read_from_file(&self.file_path_by_id(id))?;
+        Ok(todo)
+    }
+
+    pub fn delete_todo(&self, id: i32) -> Result<(), io::Error> {
+        let todo = self.get_todo(id)?;
+        let todo = todo.delete_file(&self.file_path_by_id(id))?;
+        Ok(())
     }
 
     pub fn search_todo_in_date_range(
