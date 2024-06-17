@@ -5,8 +5,8 @@ import styles from "./style.css";
 
 export const Cube = () => {
   const wasm = useWasm();
-  const [width, setWidth] = useState(800);
-  const [height, setHeight] = useState(600);
+  const [width, setWidth] = useState(400);
+  const [height, setHeight] = useState(400);
   const [x, setX] = useState(10);
   const [y, setY] = useState(10);
   const [z, setZ] = useState(10);
