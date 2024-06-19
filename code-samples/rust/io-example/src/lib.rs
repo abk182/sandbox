@@ -1,3 +1,6 @@
+//! # io-example
+//!
+//! search string in .txt file
 use std::{env, error::Error, fs};
 
 pub struct Config {
