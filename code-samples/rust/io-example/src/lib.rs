@@ -30,6 +30,7 @@ impl Config {
     }
 }
 
+
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     let contents = fs::read_to_string(config.file_path)?;
 
@@ -46,6 +47,15 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
+/// search string (case-sensetive)
+///
+/// ```
+/// use app1::search;
+/// let q = "query";
+/// let c = "content";
+/// 
+/// search(&q, &c);
+/// ```
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     contents
         .lines()
