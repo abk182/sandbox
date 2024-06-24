@@ -42,8 +42,7 @@ fn main() {
             Rc::weak_count(&leaf),
         );
 
-        println!("{:?}", leaf.parent.borrow());
-        println!("{:?}", branch.children.borrow());
+        println!("leaf.parent.borrow().upgrade().unwrap().value = {:?}", leaf.parent.borrow().upgrade().unwrap().value);
     }
 
     println!("leaf parent = {:?}", leaf.parent.borrow().upgrade());
