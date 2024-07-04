@@ -12,6 +12,11 @@ impl Post {
             approves: 0,
         }
     }
+
+    pub fn get_state(&mut self) -> String {
+        self.state.as_ref().unwrap().get_state()
+    }
+
     pub fn add_text(&mut self, text: &str) {
         self.content.push_str(text);
     }
@@ -49,6 +54,9 @@ impl Post {
 }
 
 trait State {
+    fn get_state(&self) -> String {
+        String::from("unknown")
+    }
     fn request_review(self: Box<Self>) -> Box<dyn State>;
     fn approve(self: Box<Self>) -> Box<dyn State>;
     fn reject(self: Box<Self>) -> Box<dyn State>;
@@ -60,10 +68,11 @@ trait State {
 struct Draft {}
 
 impl State for Draft {
+    fn get_state(&self) -> String {
+        String::from("draft")
+    }
     fn request_review(self: Box<Self>) -> Box<dyn State> {
-        Box::new(PendingReview {
-            approves: 0
-        })
+        Box::new(PendingReview { approves: 0 })
     }
     fn approve(self: Box<Self>) -> Box<dyn State> {
         self
@@ -78,6 +87,9 @@ struct PendingReview {
 }
 
 impl State for PendingReview {
+    fn get_state(&self) -> String {
+        String::from("pending-review")
+    }
     fn request_review(self: Box<Self>) -> Box<dyn State> {
         self
     }
@@ -97,6 +109,9 @@ impl State for PendingReview {
 struct Published {}
 
 impl State for Published {
+    fn get_state(&self) -> String {
+        String::from("published")
+    }
     fn request_review(self: Box<Self>) -> Box<dyn State> {
         self
     }
