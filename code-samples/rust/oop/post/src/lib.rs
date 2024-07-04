@@ -1,6 +1,7 @@
 pub struct Post {
     state: Option<Box<dyn State>>,
     content: String,
+    approves: i32
 }
 
 impl Post {
@@ -8,6 +9,7 @@ impl Post {
         Post {
             state: Some(Box::new(Draft {})),
             content: String::new(),
+            approves: 0
         }
     }
     pub fn add_text(&mut self, text: &str) {
@@ -30,7 +32,9 @@ impl Post {
     }
 
     pub fn approve(&mut self) {
-        if let Some(s) = self.state.take() {
+        if self.approves < 2 {
+            self.approves += 1
+        } else if let Some(s) = self.state.take() {
             self.state = Some(s.approve())
         }
     }
@@ -57,7 +61,8 @@ trait State {
     }
 }
 
-struct Draft {}
+struct Draft {
+}
 
 impl State for Draft {
     fn request_review(self: Box<Self>) -> Box<dyn State> {
