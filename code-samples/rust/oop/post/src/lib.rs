@@ -1,7 +1,7 @@
 pub struct Post {
     state: Option<Box<dyn State>>,
     content: String,
-    approves: i32
+    approves: i32,
 }
 
 impl Post {
@@ -9,7 +9,7 @@ impl Post {
         Post {
             state: Some(Box::new(Draft {})),
             content: String::new(),
-            approves: 0
+            approves: 0,
         }
     }
     pub fn add_text(&mut self, text: &str) {
@@ -18,7 +18,7 @@ impl Post {
 
     pub fn request_review(&mut self) {
         // let mut a: Option<i32> = Some(3);
-        
+
         // println!("{:?}", a.take());
         // println!("{:?}", a.take());
 
@@ -32,13 +32,11 @@ impl Post {
     }
 
     pub fn approve(&mut self) {
-        if self.approves < 2 {
-            self.approves += 1
-        } else if let Some(s) = self.state.take() {
+        if let Some(s) = self.state.take() {
             self.state = Some(s.approve())
         }
     }
-    
+
     pub fn reject(&mut self) {
         if let Some(s) = self.state.take() {
             self.state = Some(s.reject())
@@ -48,8 +46,6 @@ impl Post {
     pub fn content(&self) -> &str {
         self.state.as_ref().unwrap().content(self)
     }
-
-
 }
 
 trait State {
@@ -61,12 +57,13 @@ trait State {
     }
 }
 
-struct Draft {
-}
+struct Draft {}
 
 impl State for Draft {
     fn request_review(self: Box<Self>) -> Box<dyn State> {
-        Box::new(PendingReview {})
+        Box::new(PendingReview {
+            approves: 0
+        })
     }
     fn approve(self: Box<Self>) -> Box<dyn State> {
         self
@@ -76,14 +73,21 @@ impl State for Draft {
     }
 }
 
-struct PendingReview {}
+struct PendingReview {
+    approves: i32,
+}
 
 impl State for PendingReview {
     fn request_review(self: Box<Self>) -> Box<dyn State> {
         self
     }
-    fn approve(self: Box<Self>) -> Box<dyn State> {
-        Box::new(Published {})
+    fn approve(mut self: Box<Self>) -> Box<dyn State> {
+        if (self.approves < 2) {
+            self.approves += 1;
+            self
+        } else {
+            Box::new(Published {})
+        }
     }
     fn reject(self: Box<Self>) -> Box<dyn State> {
         Box::new(Draft {})
