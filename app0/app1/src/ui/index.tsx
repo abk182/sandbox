@@ -1,17 +1,14 @@
-import React, { Suspense, useEffect } from "react";
+import React from "react";
+import Main from "./main";
 
 export const rootDomNodeId = "app0.app1";
 
 import "./index.global.css";
 
-const ReactLazy = React.lazy(() => import("./main"));
-
 export const Ui = () => {
   return (
     <div className={"ui"}>
-      <Suspense fallback={"loading..."}>
-        <ReactLazy />
-      </Suspense>
+      <Main />
     </div>
   );
 };

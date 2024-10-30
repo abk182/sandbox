@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useWasm } from "../../wasm/use-wasm";
-import { Image } from "../image";
+import { useWasm } from "../../../wasm/use-wasm";
+import { Image } from "./image";
 import styles from "./style.css";
 
 export const Cube = () => {
@@ -88,8 +88,10 @@ export const Cube = () => {
           data={wasm.draw_cube(width, height, x, y, z)}
         />
       ) : (
-        "loading..."
+        "loading wasm module..."
       )}
     </div>
   );
 };
+
+export default Cube;
