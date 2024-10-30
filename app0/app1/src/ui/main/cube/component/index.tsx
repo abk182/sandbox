@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useWasm } from "../../../wasm/use-wasm";
+import { useWasm } from "../../../../wasm/use-wasm";
 import { Image } from "./image";
 import styles from "./style.css";
 

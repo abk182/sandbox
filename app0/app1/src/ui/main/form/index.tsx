@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useWasm } from "../../wasm/use-wasm";
+import { useWasm } from "../../../wasm/use-wasm";
 import css from "./index.css";
 
 export const Form = () => {

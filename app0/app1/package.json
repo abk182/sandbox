@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -r -f ./dist && webpack",
+    "build:wasm": "cd ./src/wasm/rust && wasm-pack build && cd ../../../../",
+    "build": "rm -r -f ./dist && npm run build:wasm && webpack",
     "start:dist": "node ./dist/server.js",
     "start": "npm run build && npm run start:dist"
   },
@@ -16,7 +17,7 @@
     "express": "^4.18.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "wasm": "file:./src/ui/wasm/rust/pkg"
+    "wasm": "file:./src/wasm/rust/pkg"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { sleep } from "../../utils/sleep";
+import { sleep } from "../utils/sleep";
 
 export const useWasm = () => {
   const [wasmReady, setWasmReady] = useState(false);
