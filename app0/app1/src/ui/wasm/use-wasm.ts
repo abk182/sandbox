@@ -6,9 +6,6 @@ export const useWasm = () => {
   useEffect(() => {
     import("wasm")
       .then((m) => {
-        return m.default;
-      })
-      .then((m) => {
         wasmRef.current = m;
         setWasmReady(true);
       });
