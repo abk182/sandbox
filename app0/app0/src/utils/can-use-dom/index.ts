@@ -3,6 +3,7 @@ export const canUseDom = () => {
     if (
       typeof window !== "undefined" &&
       window.document &&
+      // @ts-ignore
       window.document.createElement
     ) {
       return true;
